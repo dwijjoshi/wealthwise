@@ -25,9 +25,15 @@
 }
 
 button {
-  width: 60%;
+  width: 63%;
   margin: 8px 0px;
   padding: 4px 8px;
+  background-color: #0068ff;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 8px;
 }
 
 .header {
@@ -45,7 +51,14 @@ button {
 input {
   width: 60%;
   margin: 8px 0px;
-  padding: 4px 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #3a85f7;
+  outline: none;
+}
+
+input:focus {
+  border: 2px solid #3a85f7;
 }
 
 .register-image {
@@ -54,4 +67,16 @@ input {
   object-fit: fill;
   border-top-left-radius: 60px;
   border-bottom-left-radius: 60px;
+}
+
+.change-auth {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #0068ff;
+}
+
+.change-auth-container {
+  display: flex;
+  width: 60%;
+  justify-content: end;
 }

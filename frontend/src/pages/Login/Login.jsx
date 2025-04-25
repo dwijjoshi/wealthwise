@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveUser } from "../../slices/userSlice";
 
 const Login = () => {
   const [isAuthTypeRegister, setIsAuthTypeRegister] = useState(true);
@@ -10,6 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleAuthType = () => {
     setIsAuthTypeRegister(!isAuthTypeRegister);
@@ -46,6 +49,7 @@ const Login = () => {
       });
 
       if (res.data.success) {
+        dispatch(saveUser(res.data.user));
         navigate("/dashboard");
       }
     } else {
@@ -53,7 +57,9 @@ const Login = () => {
         email,
         password,
       });
+      console.log(res.data.user);
       if (res.data.success) {
+        dispatch(saveUser(res.data.user));
         navigate("/dashboard");
       }
     }
@@ -100,12 +106,14 @@ const Login = () => {
           <button type="submit">
             {isAuthTypeRegister ? "Register" : "Login"}
           </button>
-          <p>
-            Already have an account ?{" "}
-            <span onClick={handleAuthType}>
+          <div className="change-auth-container">
+            {isAuthTypeRegister
+              ? "Already have an account? "
+              : "Don't have an account? "}
+            <span onClick={handleAuthType} className="change-auth">
               {isAuthTypeRegister ? "Login" : "Register"}
             </span>
-          </p>
+          </div>
         </form>
       </div>
       <div className="image-section">
