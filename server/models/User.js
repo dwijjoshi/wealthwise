@@ -10,6 +10,12 @@ const userSchema = mongoose.Schema(
     email: { type: String, required: true, unique: true, lowercase: true },
     password: { type: String, required: true, select: false },
     transactions: [transactionSchema],
+    userName: { type: String },
+    phoneNumber: { type: String },
+    address: { type: String },
+    currentJob: { type: String },
+    placeOfWork: { type: String },
+    dateOfBirth: { type: Date },
   },
   { timestamps: true }
 );

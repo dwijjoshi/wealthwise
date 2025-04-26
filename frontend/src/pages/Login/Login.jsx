@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../../slices/userSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const [isAuthTypeRegister, setIsAuthTypeRegister] = useState(true);
@@ -42,31 +43,45 @@ const Login = () => {
     e.preventDefault();
     const body = { name, email, password, confirmPassword };
     if (isAuthTypeRegister) {
-      const res = await axios.post("http://localhost:8080/api/v1/register", {
-        name,
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "http://localhost:8080/api/v1/register",
+        {
+          name,
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
 
       if (res.data.success) {
         dispatch(saveUser(res.data.user));
         navigate("/dashboard");
       }
     } else {
-      const res = await axios.post("http://localhost:8080/api/v1/login", {
-        email,
-        password,
-      });
-      console.log(res.data.user);
-      if (res.data.success) {
-        dispatch(saveUser(res.data.user));
-        navigate("/dashboard");
+      try {
+        const res = await axios.post(
+          "http://localhost:8080/api/v1/login",
+          {
+            email,
+            password,
+          },
+          { withCredentials: true }
+        );
+        console.log(res);
+        if (res.data.success) {
+          toast.success(res.data.message);
+          dispatch(saveUser(res.data.user));
+          navigate("/dashboard");
+        }
+      } catch (error) {
+        toast.error(error.response.data.message);
       }
     }
   };
 
   return (
     <div className="signup-form-container">
+      <Toaster />
       <div className="signup-form-section">
         <div className="top-container">
           <div className="logo">WEALTHWISE</div>

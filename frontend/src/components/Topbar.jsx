@@ -1,4 +1,5 @@
 import { FaSearch, FaBell } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Topbar() {
   return (
@@ -21,14 +22,16 @@ export default function Topbar() {
         </div>
 
         <div className="relative">
-          <img src="bell icon.png" className="h-8 w-8" alt="" />
+          <img src="/bell icon.png" className="h-8 w-8" alt="" />
         </div>
 
-        <img
-          src="profilepic.png"
-          alt="Profile"
-          className="w-8 h-8 rounded-full object-cover"
-        />
+        <Link to="/dashboard/profile">
+          <img
+            src="/profilepic.png"
+            alt="Profile"
+            className="w-8 h-8 rounded-full object-cover"
+          />
+        </Link>
       </div>
     </div>
   );
