@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const months = [
   { label: "All", value: "all" },
@@ -34,6 +35,7 @@ const statusText = {
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("all");
+  const navigate = useNavigate();
   useEffect(() => {
     getAllTransaction();
   }, []);
@@ -58,20 +60,30 @@ const Transactions = () => {
   };
   return (
     <div className="p-6 bg-white rounded-2xl shadow-md">
+      <Toaster />
       <div className="flex justify-between">
         <h2 className="text-2xl font-normal mb-4">Transaction History</h2>
-        <div className="mb-4">
-          <select
-            className="p-2 rounded border"
-            value={selectedMonth}
-            onChange={(e) => setSelectedMonth(e.target.value)}
+        <div className="flex flex-col">
+          <div className="mb-4 flex items-center gap-x-2">
+            <label htmlFor="">Month :</label>
+            <select
+              className="p-2 rounded border"
+              value={selectedMonth}
+              onChange={(e) => setSelectedMonth(e.target.value)}
+            >
+              {months.map((month) => (
+                <option key={month.value} value={month.value}>
+                  {month.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div
+            onClick={() => navigate("/dashboard/add-transaction")}
+            className="mb-4 bg-green-300 text-green-700 p-2 mx-3 rounded-lg cursor-pointer flex items-center justify-center "
           >
-            {months.map((month) => (
-              <option key={month.value} value={month.value}>
-                {month.label}
-              </option>
-            ))}
-          </select>
+            Add Transaction
+          </div>
         </div>
       </div>
       <div className="overflow-x-auto">

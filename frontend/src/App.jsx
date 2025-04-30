@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
 import "./App.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Login from "./pages/Login/Login";
+import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
 import Sidebar from "./components/Sidebar";
 import Layout from "./layout/Layout";
-import HomePage from "./pages/home/HomePage.jsx";
-
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { saveUser } from "./slices/userSlice";
 import Transactions from "./pages/Transaction/Transaction";
+import AddTransaction from "./pages/AddTransaction/AddTransaction";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,12 +32,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Layout />}>
           <Route path="profile" element={<Profile />} />
           <Route path="transactions" element={<Transactions />} />
+          <Route path="add-transaction" element={<AddTransaction />} />
         </Route>
       </Routes>
     </Router>

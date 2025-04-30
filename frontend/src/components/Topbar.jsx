@@ -1,11 +1,13 @@
 import { FaSearch, FaBell } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Topbar() {
+  const { user } = useSelector((state) => state.user);
   return (
     <div className="flex items-center justify-between p-4">
       <div className="px-8">
-        <h1 className="text-lg font-semibold">Welcome, Shubham Jain!</h1>
+        <h1 className="text-lg font-semibold">Welcome, {user?.userName}</h1>
         <p className="text-gray-500 text-xs">
           Let's see what's happening with your account
         </p>
