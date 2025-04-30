@@ -1,0 +1,38 @@
+.clients-title {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 22.86px;
+  line-height: 36.1px;
+  letter-spacing: 3pt;
+  vertical-align: middle;
+  color: #f75d21;
+}
+
+.clients-heading {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 22.86px;
+  line-height: 36.1px;
+  letter-spacing: 2pt;
+  text-align: center;
+  vertical-align: middle;
+  color: #ffffff;
+}
+
+.client-name {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 24.86px;
+  line-height: 36.1px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.client-comment {
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 12.86px;
+  line-height: 22.1px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}

@@ -1,0 +1,67 @@
+.footer-heading {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 42.14px;
+  line-height: 57.36px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: capitalize;
+  color: #0068ff;
+}
+
+.footer-sub-heading {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 16.86px;
+  line-height: 31.1px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  color: #00000087;
+}
+
+.footer-app-logo {
+  width: 150px;
+}
+
+.footer-menu {
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 18.77px;
+  line-height: 33.85px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.email-us {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 22.86px;
+  line-height: 31.1px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.email-address {
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 18.86px;
+  line-height: 31.1px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  color: #3c3c3cbd;
+}
+
+.follow-us {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 22.86px;
+  line-height: 31.1px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}

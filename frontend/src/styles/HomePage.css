@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+.homepage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-name {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 32.14px;
+  line-height: 37.36px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: capitalize;
+}
+
+.app-name-1 {
+  color: #0068ff;
+}
+
+.app-name-2 {
+  color: #2fff28;
+}
+
+.app-logo {
+  width: 50px;
+}
+.app-title {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: flex-start; /* aligns to the left */
+  padding: 0rem;
+}
+
+.taskbar {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+  padding-top: 40px;
+  justify-content: center;
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 20.96px;
+  line-height: 24.56px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: capitalize;
+}
+
+.menu-item:hover {
+  cursor: pointer;
+  color: gray;
+}
+
+.registration-btn {
+  width: 199px !important;
+  height: 34px;
+  border-radius: 10px;
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 20.96px;
+  line-height: 19.56px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: capitalize;
+}
+
+.headline {
+  font-family: Lexend Mega;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 48.6px;
+  letter-spacing: 2%;
+  vertical-align: middle;
+  text-transform: capitalize;
+}
+
+.text-2 {
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 33.6px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.left-grid {
+  text-align: left;
+}
+
+.start-btn {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23.6px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.start-btn-logo {
+  width: 35px;
+  margin-right: 10px;
+}
+
+.home-section-content.heading {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 25.96px;
+  line-height: 25.56px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: capitalize;
+}
+
+.home-section-content.text {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 14.5px;
+  line-height: 20.6px;
+  letter-spacing: 0%;
+  text-align: justify;
+  vertical-align: middle;
+}
+
+.home-section-content > p {
+  text-align: left;
+}
+
+.text-items-right {
+  text-align: right !important;
+}
+
+.home-sub-heading {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 32.19px;
+  line-height: 39.38px;
+  letter-spacing: 2pt;
+  vertical-align: middle;
+}
+.home-heading {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 25.3px;
+  line-height: 39.38px;
+  letter-spacing: 3pt;
+  vertical-align: middle;
+  color: #f75d21;
+}
+
+.sub-content-heading {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 14.92px;
+  line-height: 21.5px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.sub-content-description {
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 13.58px;
+  line-height: 18.83px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.sub-content-icon {
+  width: 62.115997314453125;
+  height: 62.115997314453125;
+  top: 1521.58px;
+  left: 1205.09px;
+}

@@ -1,0 +1,36 @@
+.about-us-heading {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 30.16px;
+  line-height: 19.27px;
+  letter-spacing: 10%;
+  vertical-align: middle;
+  color: #da4c0f;
+}
+
+.about-us-sub-heading {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 32.16px;
+  line-height: 29.27px;
+  letter-spacing: 10%;
+  vertical-align: middle;
+}
+
+.card-heading {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 19.27px;
+  letter-spacing: 10%;
+  vertical-align: middle;
+}
+
+.card-content {
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27.3px;
+  letter-spacing: 10%;
+  vertical-align: middle;
+}
