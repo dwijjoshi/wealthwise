@@ -11,6 +11,7 @@ import Layout from "./layout/Layout";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { saveUser } from "./slices/userSlice";
+import Transactions from "./pages/Transaction/Transaction";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Layout />}>
           <Route path="profile" element={<Profile />} />
+          <Route path="transactions" element={<Transactions />} />
         </Route>
       </Routes>
     </Router>

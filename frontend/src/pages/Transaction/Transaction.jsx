@@ -1,0 +1,133 @@
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import moment from "moment";
+
+const months = [
+  { label: "All", value: "all" },
+  { label: "January", value: "01" },
+  { label: "February", value: "02" },
+  { label: "March", value: "03" },
+  { label: "April", value: "04" },
+  { label: "May", value: "05" },
+  { label: "June", value: "06" },
+  { label: "July", value: "07" },
+  { label: "August", value: "08" },
+  { label: "September", value: "09" },
+  { label: "October", value: "10" },
+  { label: "November", value: "11" },
+  { label: "December", value: "12" },
+];
+
+const statusColor = {
+  confirmed: "bg-[#6DFF68]",
+  cancelled: "bg-[#F65659]",
+  pending: "bg-[#FFD884]",
+};
+
+const statusText = {
+  confirmed: "text-[#096B06]",
+  cancelled: "text-[#E01313]",
+  pending: "text-[#97450E]",
+};
+
+const Transactions = () => {
+  const [transactions, setTransactions] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState("all");
+  useEffect(() => {
+    getAllTransaction();
+  }, []);
+
+  const filteredTransactions = transactions.filter((txn) => {
+    if (selectedMonth === "all") return true;
+    const txnMonth = moment(txn.date).format("MM"); // "04" for April
+    return txnMonth === selectedMonth;
+  });
+
+  const getAllTransaction = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/api/v1/transaction", {
+        withCredentials: true,
+      });
+      console.log(res);
+
+      if (res.data.success) {
+        setTransactions(res.data.transactions);
+      }
+    } catch (error) {}
+  };
+  return (
+    <div className="p-6 bg-white rounded-2xl shadow-md">
+      <div className="flex justify-between">
+        <h2 className="text-2xl font-normal mb-4">Transaction History</h2>
+        <div className="mb-4">
+          <select
+            className="p-2 rounded border"
+            value={selectedMonth}
+            onChange={(e) => setSelectedMonth(e.target.value)}
+          >
+            {months.map((month) => (
+              <option key={month.value} value={month.value}>
+                {month.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full table-auto">
+          <thead>
+            <tr className=" text-gray-500 text-sm font-extralight">
+              <th className="p-3 text-left font-medium">User Name</th>
+              <th className="p-3 text-left font-medium">Transaction ID</th>
+              <th className="p-3 text-left font-medium">Type</th>
+              <th className="p-3 text-left font-medium">Account</th>
+              <th className="p-3 text-left font-medium">Date</th>
+              <th className="p-3 text-left font-medium">Amount</th>
+              <th className="p-3 text-left font-medium">Status</th>
+              <th className="p-3 text-left font-medium">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredTransactions?.map((txn, index) => (
+              <tr key={index} className="border-b hover:bg-gray-50">
+                <td className="p-3">{txn.username}</td>
+                <td className="p-3">{txn._id.slice(-10)}</td>
+                <td className="p-3">{txn.type}</td>
+                <td className="p-3">{txn.account}</td>
+                <td className="p-3">{moment(txn.date).format("DD/MM/YYYY")}</td>
+                <td className="p-3">₹ {txn.amount}</td>
+                <td className="p-3">
+                  <spa
+                    className={`text-sm px-2 py-1 rounded-md ${
+                      statusColor[txn.status]
+                    } ${statusText[txn.status]} `}
+                  >
+                    {txn.status}
+                  </spa>
+                </td>
+                <td className="flex p-3 gap-x-2">
+                  <div className="px-2 py-1 bg-yellow-300 text-yellow-600 rounded-md">
+                    Edit
+                  </div>
+                  <div className="px-2 py-1 bg-red-300 text-red-600 rounded-md">
+                    Delete
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {filteredTransactions.length === 0 ? (
+          <div className="flex justify-center w-full py-4">
+            No Transactions to show
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Transactions;
