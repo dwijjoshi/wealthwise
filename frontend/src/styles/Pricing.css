@@ -1,0 +1,28 @@
+.pricing-title {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 22.86px;
+  line-height: 36.1px;
+  letter-spacing: 3pt;
+  vertical-align: middle;
+  color: #f75d21;
+}
+
+.pricing-heading {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 34.68px;
+  line-height: 36.1px;
+  letter-spacing: 2pt;
+  vertical-align: middle;
+}
+
+.pricing-sub-heading {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 16.68px;
+  line-height: 36.1px;
+  letter-spacing: 2%;
+  vertical-align: middle;
+  color: #3c3c3cd1;
+}

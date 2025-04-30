@@ -1,0 +1,17 @@
+.finance-heading {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 39.5px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.finance-text {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 17.5px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
