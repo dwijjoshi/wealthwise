@@ -83,9 +83,25 @@ const Login = () => {
     <div className="signup-form-container">
       <Toaster />
       <div className="signup-form-section">
-        <div className="top-container">
-          <div className="logo">WEALTHWISE</div>
-          <h3 className="header">Welcome to the future of finance</h3>
+        <div className="top-container px-4 pt-2">
+          <div className="flex items-center mb-6 gap-x-2">
+            <img className="h-[47px] w-[60px]" src="/logo.png" alt="" />
+            <div className="font-semibold text-[20px]">
+              <span className="text-[#0068FF]">WEALTH</span>
+              <span className="text-[#11FF09]">WISE</span>
+            </div>
+            <div className="change-auth-container">
+              {isAuthTypeRegister
+                ? "Already have an account? "
+                : "Don't have an account? "}
+              <span onClick={handleAuthType} className="change-auth">
+                {isAuthTypeRegister ? "Login" : "Register"}
+              </span>
+            </div>
+          </div>
+          <h3 className="header font-semibold text-xl pt-[-20px]">
+            Welcome to the future of finance
+          </h3>
           <span>Register the account and walk to the financial freedom</span>
         </div>
 
@@ -121,15 +137,19 @@ const Login = () => {
           <button type="submit">
             {isAuthTypeRegister ? "Register" : "Login"}
           </button>
-          <div className="change-auth-container">
-            {isAuthTypeRegister
-              ? "Already have an account? "
-              : "Don't have an account? "}
-            <span onClick={handleAuthType} className="change-auth">
-              {isAuthTypeRegister ? "Login" : "Register"}
-            </span>
-          </div>
         </form>
+        <div className="flex justify-center">
+          <ul className="flex flex-col justify-start items-start w-[60%] list-disc list-inside">
+            <li>Lorem ipsum dolor sit amet,</li>
+            <li>Lorem ipsum dolor sit amet,</li>
+            <li>Lorem ipsum dolor sit amet,</li>
+            <li>Lorem ipsum dolor sit amet,</li>
+          </ul>
+        </div>
+
+        <div>
+          <input type="checkbox" />
+        </div>
       </div>
       <div className="image-section">
         <img className="register-image" src="register.png" alt="" />

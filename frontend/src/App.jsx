@@ -13,6 +13,8 @@ import { useDispatch } from "react-redux";
 import { saveUser } from "./slices/userSlice";
 import Transactions from "./pages/Transaction/Transaction";
 import AddTransaction from "./pages/AddTransaction/AddTransaction";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import HomePage from "./pages/Home/HomePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,10 +34,11 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Layout />}>
+          <Route path="" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
           <Route path="transactions" element={<Transactions />} />
           <Route path="add-transaction" element={<AddTransaction />} />

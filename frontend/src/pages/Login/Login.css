@@ -70,7 +70,6 @@ input:focus {
 }
 
 .change-auth {
-  text-decoration: underline;
   cursor: pointer;
   color: #0068ff;
 }
