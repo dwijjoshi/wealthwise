@@ -6,6 +6,7 @@ import Profile from "./pages/Profile/Profile";
 import Sidebar from "./components/Sidebar";
 import Layout from "./layout/Layout";
 import HomePage from "./pages/home/HomePage.jsx";
+import RecurringBills from "./pages/Recurring Bills/RecurringBills";
 
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -34,6 +35,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Layout />}>
           <Route path="profile" element={<Profile />} />
+          <Route path="recurring-bills" element={<RecurringBills />} />
         </Route>
       </Routes>
     </Router>

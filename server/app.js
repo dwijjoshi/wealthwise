@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const user = require("./routes/user");
 const transaction = require("./routes/transaction");
+const bills = require("./routes/recurringBills");
 
 app.use(
   cors({
@@ -18,4 +19,5 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1", user);
 app.use("/api/v1", transaction);
+app.use("/api/v1", bills);
 module.exports = app;
