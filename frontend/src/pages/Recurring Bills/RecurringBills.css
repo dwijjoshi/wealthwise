@@ -1,0 +1,23 @@
+.profile input {
+  width: 80%;
+}
+
+.input-box {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.form-toggle {
+  width: 40px;
+  height: 20px;
+  accent-color: blue;
+}
+
+table th,
+table td {
+  padding: 12px 8px;
+  font-size: 14px;
+}

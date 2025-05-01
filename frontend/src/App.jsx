@@ -8,13 +8,15 @@ import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
 import Sidebar from "./components/Sidebar";
 import Layout from "./layout/Layout";
+import HomePage from "./pages/home/HomePage.jsx";
+import RecurringBills from "./pages/Recurring Bills/RecurringBills";
+
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { saveUser } from "./slices/userSlice";
 import Transactions from "./pages/Transaction/Transaction";
 import AddTransaction from "./pages/AddTransaction/AddTransaction";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import HomePage from "./pages/Home/HomePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +44,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="transactions" element={<Transactions />} />
           <Route path="add-transaction" element={<AddTransaction />} />
+          <Route path="recurring-bills" element={<RecurringBills />} />
         </Route>
       </Routes>
     </Router>
