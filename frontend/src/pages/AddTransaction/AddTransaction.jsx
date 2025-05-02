@@ -14,7 +14,7 @@ const AddTransaction = () => {
     type: "income",
     status: "confirmed",
     note: "",
-    date: "", // Default to today
+    date: new Date().toISOString().split("T")[0], // Default to today
   });
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -163,6 +163,7 @@ const AddTransaction = () => {
             <input
               type="date"
               name="date"
+              value={formData.date}
               onChange={handleChange}
               className="w-full p-2 border rounded"
               required

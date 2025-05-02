@@ -12,7 +12,7 @@ const swaggerSpec = require("./swagger");
 
 app.use(
   cors({
-    origin: "https://wealthwise-app.netlify.app",
+    origin: ["https://wealthwise-app.netlify.app","http://localhost:5173"]
     credentials: true,
   })
 );
