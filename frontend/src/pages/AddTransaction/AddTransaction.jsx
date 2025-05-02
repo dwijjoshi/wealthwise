@@ -19,28 +19,28 @@ const AddTransaction = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  // useEffect(() => {
-  //   if (id) {
-  //     console.log("in id");
-  //     const fetchTransaction = async () => {
-  //       try {
-  //         const res = await axios.get(
-  //           `https://wealthwise-sdlm.onrender.com/api/v1/transaction/${id}`,
-  //           { withCredentials: true }
-  //         );
+  useEffect(() => {
+    if (id) {
+      console.log("in id");
+      const fetchTransaction = async () => {
+        try {
+          const res = await axios.get(
+            `https://wealthwise-sdlm.onrender.com/api/v1/transaction/${id}`,
+            { withCredentials: true }
+          );
 
-  //         if (res.data.success) {
-  //           const { _id, date, ...rest } = res.data.transaction;
-  //           setFormData({
-  //             ...rest,
-  //             date: moment(date).format("YYYY-MM-DD"),
-  //           });
-  //         }
-  //       } catch (error) {}
-  //     };
-  //     fetchTransaction();
-  //   }
-  // }, []);
+          if (res.data.success) {
+            const { _id, date, ...rest } = res.data.transaction;
+            setFormData({
+              ...rest,
+              date: moment(date).format("YYYY-MM-DD"),
+            });
+          }
+        } catch (error) {}
+      };
+      fetchTransaction();
+    }
+  }, []);
 
   const navigate = useNavigate();
 
