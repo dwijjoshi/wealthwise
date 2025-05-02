@@ -20,6 +20,7 @@ exports.register = async (req, res) => {
       .cookie("token", token, {
         expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
         httpOnly: true,
+        secure: true,
       })
       .json({
         success: true,
@@ -64,6 +65,7 @@ exports.login = async (req, res) => {
       .cookie("token", token, {
         expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
         httpOnly: true,
+        secure: true,
       })
       .json({
         success: true,

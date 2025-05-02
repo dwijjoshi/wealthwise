@@ -24,7 +24,7 @@ const AddTransaction = () => {
       const fetchTransaction = async () => {
         try {
           const res = await axios.get(
-            `http://localhost:8080/api/v1/transaction/${id}`,
+            `https://wealthwise-sdlm.onrender.com/api/v1/transaction/${id}`,
             { withCredentials: true }
           );
 
@@ -50,7 +50,7 @@ const AddTransaction = () => {
     if (id) {
       try {
         const res = await axios.put(
-          `http://localhost:8080/api/v1/transaction/${id}`,
+          `http://wealthwise-sdlm.onrender.com/api/v1/transaction/${id}`,
           formData,
           { withCredentials: true }
         );
@@ -66,7 +66,7 @@ const AddTransaction = () => {
     } else {
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/v1/transaction",
+          "http://wealthwise-sdlm.onrender.com/api/v1/transaction",
           formData,
           { withCredentials: true }
         );

@@ -69,7 +69,7 @@ const Login = () => {
           return;
         }
         const res = await axios.post(
-          "http://localhost:8080/api/v1/register",
+          "https://wealthwise-sdlm.onrender.com/api/v1/register",
           {
             name,
             email,
@@ -89,7 +89,7 @@ const Login = () => {
     } else {
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/v1/login",
+          "https://wealthwise-sdlm.onrender.com/api/v1/login",
           {
             email,
             password,

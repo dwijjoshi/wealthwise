@@ -48,7 +48,7 @@ const Profile = () => {
   const handleSubmit = async () => {
     try {
       const res = await axios.put(
-        "http://localhost:8080/api/v1/updateUser",
+        "https://wealthwise-sdlm.onrender.com/api/v1/updateUser",
         updateUserData,
         { withCredentials: true }
       );
@@ -65,7 +65,7 @@ const Profile = () => {
   const handleDeleteAccount = async () => {
     try {
       const res = await axios.delete(
-        "http://localhost:8080/api/v1/deleteAccount",
+        "http://wealthwise-sdlm.onrender.com/api/v1/deleteAccount",
         {
           withCredentials: true,
         }

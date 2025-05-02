@@ -16,7 +16,9 @@ export default function RecurringBills() {
   });
 
   const fetchBills = async () => {
-    const res = await axios.get("http://localhost:8080/api/bills");
+    const res = await axios.get(
+      "https://wealthwise-sdlm.onrender.com/api/bills"
+    );
     setBills(res.data);
   };
 
@@ -31,7 +33,7 @@ export default function RecurringBills() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/api/bills", form);
+    await axios.post("http://wealthwise-sdlm.onrender.com/api/bills", form);
     fetchBills();
     setForm({
       name: "",

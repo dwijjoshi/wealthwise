@@ -65,9 +65,12 @@ const Transactions = () => {
 
   const getAllTransaction = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/v1/transaction", {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        "https://wealthwise-sdlm.onrender.com/api/v1/transaction",
+        {
+          withCredentials: true,
+        }
+      );
       console.log(res);
 
       if (res.data.success) {
@@ -80,7 +83,7 @@ const Transactions = () => {
     try {
       if (id) {
         const res = await axios.delete(
-          `http://localhost:8080/api/v1/transaction/${id}`,
+          `https://wealthwise-sdlm.onrender.com/api/v1/transaction/${id}`,
           { withCredentials: true }
         );
 

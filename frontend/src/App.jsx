@@ -25,9 +25,12 @@ function App() {
   useEffect(() => {
     const loadUser = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/v1/me", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://wealthwise-sdlm.onrender.com/api/v1/me",
+          {
+            withCredentials: true,
+          }
+        );
         console.log(res);
         if (res.data.success) {
           dispatch(saveUser(res.data.user));
