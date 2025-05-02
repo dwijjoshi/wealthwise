@@ -5,6 +5,7 @@ exports.createTransaction = async (req, res) => {
     const newTransaction = {
       username: req.body.username,
       amount: req.body.amount,
+      date: req.body.date,
       type: req.body.type,
       status: req.body.status,
       note: req.body.note || "",
@@ -69,6 +70,7 @@ exports.updateTransaction = async (req, res) => {
 
     transaction.username = req.body.username || transaction.username;
     transaction.amount = req.body.amount || transaction.amount;
+    transaction.date = req.body.date || transaction.date;
     transaction.type = req.body.type || transaction.type;
     transaction.status = req.body.status || transaction.status;
     transaction.note = req.body.note || transaction.note;
