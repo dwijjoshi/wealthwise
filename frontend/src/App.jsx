@@ -8,7 +8,7 @@ import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
 import Sidebar from "./components/Sidebar";
 import Layout from "./layout/Layout";
-import HomePage from "./pages/home/HomePage.jsx";
+import HomePage from "./pages/Home/HomePage.jsx";
 import RecurringBills from "./pages/Recurring Bills/RecurringBills";
 
 import axios from "axios";
