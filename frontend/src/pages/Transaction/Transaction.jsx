@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import moment from "moment";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const months = [
   { label: "All", value: "all" },
@@ -34,17 +34,31 @@ const statusText = {
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
+  const [filteredTransaction, setFilteredTransactions] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("all");
+  const [isDashboardPage, setIsDashboardPage] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
     getAllTransaction();
   }, []);
 
-  const filteredTransactions = transactions.filter((txn) => {
-    if (selectedMonth === "all") return true;
-    const txnMonth = moment(txn.date).format("MM"); // "04" for April
-    return txnMonth === selectedMonth;
-  });
+  useEffect(() => {
+    let getFilteredTransactions = transactions.filter((txn) => {
+      if (selectedMonth === "all") return true;
+      const txnMonth = moment(txn.date).format("MM"); // "04" for April
+      return txnMonth === selectedMonth;
+    });
+    if (location.pathname === "/dashboard/") {
+      console.log("here");
+      setIsDashboardPage(true);
+      getFilteredTransactions = getFilteredTransactions.slice(0, 5);
+    }
+    setFilteredTransactions(getFilteredTransactions);
+  }, [transactions, selectedMonth]);
+
+  // console.log(location.pathname);
 
   const getAllTransaction = async () => {
     try {
@@ -78,12 +92,14 @@ const Transactions = () => {
               ))}
             </select>
           </div>
-          <div
-            onClick={() => navigate("/dashboard/add-transaction")}
-            className="mb-4 bg-green-300 text-green-700 p-2 mx-3 rounded-lg cursor-pointer flex items-center justify-center "
-          >
-            Add Transaction
-          </div>
+          {!isDashboardPage && (
+            <div
+              onClick={() => navigate("/dashboard/add-transaction")}
+              className="mb-4 bg-green-300 text-green-700 p-2 mx-3 rounded-lg cursor-pointer flex items-center justify-center "
+            >
+              Add Transaction
+            </div>
+          )}
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -93,20 +109,24 @@ const Transactions = () => {
               <th className="p-3 text-left font-medium">User Name</th>
               <th className="p-3 text-left font-medium">Transaction ID</th>
               <th className="p-3 text-left font-medium">Type</th>
-              <th className="p-3 text-left font-medium">Account</th>
+              {!isDashboardPage && (
+                <th className="p-3 text-left font-medium">Account</th>
+              )}
               <th className="p-3 text-left font-medium">Date</th>
               <th className="p-3 text-left font-medium">Amount</th>
               <th className="p-3 text-left font-medium">Status</th>
-              <th className="p-3 text-left font-medium">Action</th>
+              {!isDashboardPage && (
+                <th className="p-3 text-left font-medium">Action</th>
+              )}
             </tr>
           </thead>
           <tbody>
-            {filteredTransactions?.map((txn, index) => (
+            {filteredTransaction?.map((txn, index) => (
               <tr key={index} className="border-b hover:bg-gray-50">
                 <td className="p-3">{txn.username}</td>
                 <td className="p-3">{txn._id.slice(-10)}</td>
                 <td className="p-3">{txn.type}</td>
-                <td className="p-3">{txn.account}</td>
+                {!isDashboardPage && <td className="p-3">{txn.account}</td>}
                 <td className="p-3">{moment(txn.date).format("DD/MM/YYYY")}</td>
                 <td className="p-3">₹ {txn.amount}</td>
                 <td className="p-3">
@@ -118,19 +138,21 @@ const Transactions = () => {
                     {txn.status}
                   </spa>
                 </td>
-                <td className="flex p-3 gap-x-2">
-                  <div className="px-2 py-1 bg-yellow-300 text-yellow-600 rounded-md">
-                    Edit
-                  </div>
-                  <div className="px-2 py-1 bg-red-300 text-red-600 rounded-md">
-                    Delete
-                  </div>
-                </td>
+                {!isDashboardPage && (
+                  <td className="flex p-3 gap-x-2">
+                    <div className="px-2 py-1 bg-yellow-300 text-yellow-600 rounded-md">
+                      Edit
+                    </div>
+                    <div className="px-2 py-1 bg-red-300 text-red-600 rounded-md">
+                      Delete
+                    </div>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
         </table>
-        {filteredTransactions.length === 0 ? (
+        {filteredTransaction.length === 0 ? (
           <div className="flex justify-center w-full py-4">
             No Transactions to show
           </div>

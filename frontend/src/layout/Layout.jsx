@@ -11,9 +11,9 @@ const Layout = () => {
   return (
     <div className="flex bg-[#e4e3e367]">
       <Sidebar />
-      <div className="w-full px-8">
+      <div className="w-full px-6">
         <Topbar />
-        <div className="bg-white ml-8 rounded-xl mb-8">
+        <div className="bg-white ml-6 rounded-xl mb-8">
           <Outlet />
         </div>
       </div>

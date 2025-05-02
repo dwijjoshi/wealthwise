@@ -1,3 +1,6 @@
+import { NavLink } from "react-router-dom";
+import "./Sidebar.css";
+
 export default function Sidebar() {
   return (
     <div className="flex flex-col h-screen p-4 pl-6 w-64 sticky top-0">
@@ -14,49 +17,70 @@ export default function Sidebar() {
           <h2 className="text-gray-500/70 text-sm mb-6 tracking-wide">
             Manage
           </h2>
-          <nav className="flex flex-col gap-4 gap-y-6">
-            <a
-              href="/dashboard/"
-              className="flex gap-x-2 items-center text-gray-700 hover:text-blue-600"
+          <nav className="flex flex-col gap-4 gap-y-4">
+            <NavLink
+              end
+              to="/dashboard/"
+              className="flex nav-link gap-x-2 items-center text-gray-700 hover:text-blue-600"
             >
-              <img className="h-5 w-5" src="/DashboardIcon.png" alt="" />
-              Dashboard
-            </a>
-            <a
-              href="/dashboard/cards"
-              className="flex gap-x-2 items-center text-gray-700 hover:text-blue-600"
+              {({ isActive }) => (
+                <>
+                  <img
+                    className="h-5 w-5"
+                    src={
+                      isActive ? "/dashboard-white.png" : "/DashboardIcon.png"
+                    }
+                    alt=""
+                  />
+                  <span>Dashboard</span>
+                </>
+              )}
+            </NavLink>
+            <NavLink
+              to="/dashboard/cards"
+              className="flex nav-link gap-x-2 items-center text-gray-700 hover:text-blue-600"
             >
               <img className="h-5 w-5" src="/Card icon'.png" alt="" />
               My Cards
-            </a>
-            <a
-              href="/dashboard/transactions"
-              className="flex gap-x-2 items-center text-gray-700 hover:text-blue-600"
+            </NavLink>
+            <NavLink
+              to="/dashboard/transactions"
+              className="flex nav-link gap-x-2 items-center text-gray-700 hover:text-blue-600"
             >
-              <img className="h-5 w-5" src="/Transcation icon.png" alt="" />
-              Transactions
-            </a>
-            <a
-              href="/dashboard/recurring-bills"
-              className="flex gap-x-2 items-center text-gray-700 hover:text-blue-600"
+              {({ isActive }) => (
+                <>
+                  <img
+                    className="h-5 w-5"
+                    src={
+                      isActive ? "/transaction-white.png" : "/Transcation.png"
+                    }
+                    alt=""
+                  />
+                  <span>Transaction</span>
+                </>
+              )}
+            </NavLink>
+            <NavLink
+              to="/dashboard/recurring-bills"
+              className="flex nav-link gap-x-2 items-center text-gray-700 hover:text-blue-600"
             >
               <img className="h-5 w-5" src="/Recurring.png" alt="" />
               Recurring Bills
-            </a>
-            <a
-              href="/dashboard/analytics"
-              className="flex gap-x-2 items-center text-gray-700 hover:text-blue-600"
+            </NavLink>
+            <NavLink
+              to="/dashboard/analytics"
+              className="flex nav-link gap-x-2 items-center text-gray-700 hover:text-blue-600"
             >
               <img className="h-5 w-5" src="/Analytics icon.png" alt="" />
               Analytics
-            </a>
-            <a
-              href="/dashboard/settings"
-              className="flex gap-x-2 items-center text-gray-700 hover:text-blue-600"
+            </NavLink>
+            <NavLink
+              to="/dashboard/settings"
+              className="flex nav-link gap-x-2 items-center text-gray-700 hover:text-blue-600"
             >
               <img className="h-5 w-5" src="/Settings icon.png" alt="" />
               Settings
-            </a>
+            </NavLink>
           </nav>
         </div>
       </div>

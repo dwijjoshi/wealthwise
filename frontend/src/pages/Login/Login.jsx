@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../../slices/userSlice";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -14,6 +14,13 @@ const Login = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  });
 
   const handleAuthType = () => {
     setIsAuthTypeRegister(!isAuthTypeRegister);
@@ -39,23 +46,45 @@ const Login = () => {
     setConfirmPassword(e.target.value);
   };
 
+  const isValidPassword = (password) => {
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,12}$/;
+    return passwordRegex.test(password);
+  };
+
   const formSubmitHandler = async (e) => {
     e.preventDefault();
     const body = { name, email, password, confirmPassword };
     if (isAuthTypeRegister) {
-      const res = await axios.post(
-        "http://localhost:8080/api/v1/register",
-        {
-          name,
-          email,
-          password,
-        },
-        { withCredentials: true }
-      );
+      try {
+        if (password !== confirmPassword) {
+          toast.error("Confirm Password does not match with password");
+          return;
+        }
 
-      if (res.data.success) {
-        dispatch(saveUser(res.data.user));
-        navigate("/dashboard");
+        if (!isValidPassword(password)) {
+          toast.error(
+            "Password is not valid. Please read the validation rules"
+          );
+          return;
+        }
+        const res = await axios.post(
+          "http://localhost:8080/api/v1/register",
+          {
+            name,
+            email,
+            password,
+          },
+          { withCredentials: true }
+        );
+
+        if (res.data.success) {
+          dispatch(saveUser(res.data.user));
+          navigate("/dashboard");
+          toast.success(res.data.message);
+        }
+      } catch (error) {
+        toast.error(error.response.data.message);
       }
     } else {
       try {
@@ -83,7 +112,7 @@ const Login = () => {
     <div className="signup-form-container">
       <Toaster />
       <div className="signup-form-section">
-        <div className="top-container px-4 pt-2">
+        <div className="top-container px-4 pt-2 mb-4">
           <div className="flex items-center mb-6 gap-x-2">
             <img className="h-[47px] w-[60px]" src="/logo.png" alt="" />
             <div className="font-semibold text-[20px]">
@@ -112,44 +141,53 @@ const Login = () => {
               name="name"
               placeholder="User Name"
               onChange={nameChangeHandler}
+              required
             />
           )}
           <input
-            type="text"
+            type="email"
             name="email"
             placeholder="Email"
             onChange={emailChangeHandler}
+            required
           />
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="Password"
             onChange={passwordChangeHandler}
+            required
           />
           {isAuthTypeRegister && (
             <input
-              type="text"
+              type="password"
               name="confirmPassword"
               placeholder="Confirm Password"
               onChange={confirmPasswordChangeHandler}
+              required
             />
           )}
-          <button type="submit">
+          <button type="submit" className="cursor-pointer">
             {isAuthTypeRegister ? "Register" : "Login"}
           </button>
         </form>
-        <div className="flex justify-center">
-          <ul className="flex flex-col justify-start items-start w-[60%] list-disc list-inside">
-            <li>Lorem ipsum dolor sit amet,</li>
-            <li>Lorem ipsum dolor sit amet,</li>
-            <li>Lorem ipsum dolor sit amet,</li>
-            <li>Lorem ipsum dolor sit amet,</li>
-          </ul>
-        </div>
-
-        <div>
-          <input type="checkbox" />
-        </div>
+        {isAuthTypeRegister && (
+          <div className="flex justify-center">
+            <ul className="flex flex-col justify-start text-sm items-start w-[60%] list-disc list-inside">
+              <li>Must be at least 8-12 characters long</li>
+              <li>
+                Include at least one uppercase (A-Z) AND one lowercase letter
+                (0-2)
+              </li>
+              <li>Include at least one number (0-9)</li>
+              <li>Include at least one special character</li>
+              <li>
+                Avoid using easily guessable information like your name or
+                birthdate
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
       <div className="image-section">
         <img className="register-image" src="register.png" alt="" />

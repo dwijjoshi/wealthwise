@@ -20,34 +20,48 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadUser = async () => {
-      const res = await axios.get("http://localhost:8080/api/v1/me", {
-        withCredentials: true,
-      });
-      if (res.data.success) {
-        dispatch(saveUser(res.data.user));
+      try {
+        const res = await axios.get("http://localhost:8080/api/v1/me", {
+          withCredentials: true,
+        });
+        console.log(res);
+        if (res.data.success) {
+          dispatch(saveUser(res.data.user));
+        }
+      } catch (error) {
+        console.error("User not found");
+      } finally {
+        setLoading(false);
       }
     };
     loadUser();
   }, []);
 
+  if (loading) {
+    return <div>Loading</div>;
+  }
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/dashboard" element={<Layout />}>
-          <Route path="" element={<Dashboard />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="transactions" element={<Transactions />} />
-          <Route path="add-transaction" element={<AddTransaction />} />
-          <Route path="recurring-bills" element={<RecurringBills />} />
-        </Route>
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/dashboard" element={<Layout />}>
+            <Route path="" element={<Dashboard />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="transactions" element={<Transactions />} />
+            <Route path="add-transaction" element={<AddTransaction />} />
+            <Route path="recurring-bills" element={<RecurringBills />} />
+          </Route>
+        </Routes>
+      </Router>
+    </>
   );
 }
 

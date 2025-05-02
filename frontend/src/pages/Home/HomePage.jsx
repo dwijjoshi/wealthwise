@@ -14,8 +14,10 @@ import personImg from "../../images/home_img_1.png";
 import piggyBankImg from "../../images/home_img_2.png";
 import secureIcon from "../../assets/secure-icon.svg";
 import coinIcon from "../../assets/coin-icon.svg";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
+  const navigate = useNavigate();
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -33,7 +35,10 @@ function HomePage() {
             <span className="app-name-2">WISE</span>
           </span>
         </div>
-        <div className="registration-btn-div">
+        <div
+          className="registration-btn-div cursor-pointer"
+          onClick={() => navigate("/login")}
+        >
           <button className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded registration-btn">
             Register
           </button>
@@ -80,7 +85,10 @@ function HomePage() {
             Track, save and grow – all in one seamless platform built for your
             success.
           </p>
-          <button className="mt-6 bg-[#0068FF] hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl flex items-center gap-2 start-btn">
+          <button
+            onClick={() => navigate("/login")}
+            className="mt-6 bg-[#0068FF] cursor-pointer hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl flex items-center gap-2 start-btn"
+          >
             <img src={pigIcon} alt="Pig Icon" className="start-btn-logo" />
             Start Tracking Today !
           </button>
