@@ -7,6 +7,9 @@ const user = require("./routes/user");
 const transaction = require("./routes/transaction");
 const bills = require("./routes/recurringBills");
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger");
+
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -20,4 +23,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1", user);
 app.use("/api/v1", transaction);
 app.use("/api/v1", bills);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 module.exports = app;

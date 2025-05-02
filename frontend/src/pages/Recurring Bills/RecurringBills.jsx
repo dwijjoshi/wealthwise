@@ -22,7 +22,9 @@ const RecurringBills = () => {
 
   const fetchBills = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/bills/alltransaction");
+      const res = await axios.get("http://localhost:8080/api/v1/bills", {
+        withCredentials: true,
+      });
       setTransactions(res.data.bills);
     } catch (err) {
       console.error("Error fetching bills:", err);
@@ -31,8 +33,10 @@ const RecurringBills = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post("http://localhost:8080/api/bills/add", formData);
-      fetchBills(); // Refresh transactions
+      await axios.post("http://localhost:8080/api/v1/bills/add", formData, {
+        withCredentials: true,
+      });
+      //fetchBills(); // Refresh transactions
     } catch (err) {
       console.error("Error adding bill:", err);
     }

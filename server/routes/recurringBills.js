@@ -1,27 +1,95 @@
 const express = require("express");
 const router = express.Router();
-const Bill = require("../models/RecurringBills");
+const User = require("../models/User");
+const { isAuthenticated } = require("../middleware/auth");
 
-// Save a new recurring bill
-router.post("/add", async (req, res) => {
+/**
+ * @swagger
+ * /bills:
+ *   get:
+ *     summary: Get all bills for the authenticated user
+ *     tags: [Bills]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved bills
+ */
+
+/**
+ * @swagger
+ * /bills/add:
+ *   post:
+ *     summary: Add a new bill
+ *     tags: [Bills]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               amount:
+ *                 type: number
+ *               frequency:
+ *                 type: string
+ *               dueDate:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Bill added successfully
+ */
+
+// Add a new bill for the authenticated user
+router.post("/bills/add", isAuthenticated, async (req, res) => {
   try {
-    const newBill = new Bill(req.body);
-    await newBill.save();
-    res
-      .status(201)
-      .json({ success: true, message: "Bill saved successfully." });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+    // Ensure that required fields are provided
+    const {
+      name,
+      category,
+      amount,
+      frequency,
+      startDate,
+      endDate,
+      account,
+      autoPay,
+    } = req.body;
+    if (
+      !name ||
+      !category ||
+      !amount ||
+      !frequency ||
+      !startDate ||
+      !endDate ||
+      !account
+    ) {
+      return res
+        .status(400)
+        .json({ success: false, message: "All fields are required" });
+    }
+
+    const user = await User.findById(req.user._id);
+
+    // Check if user exists
+
+    // Add bill to user's bills array
+    user.bills.push(req.body);
+    await user.save();
+    res.status(201).json({ success: true, message: "Bill added successfully" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
   }
 });
 
-// Get all bills
-router.get("/bills/alltransaction", async (req, res) => {
+// Get all bills for authenticated user
+router.get("/bills", isAuthenticated, async (req, res) => {
   try {
-    const bills = await Bill.find();
-    res.status(200).json({ success: true, bills });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+    const user = await User.findById(req.user._id);
+    res.status(200).json({ success: true, bills: user.bills });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
   }
 });
 

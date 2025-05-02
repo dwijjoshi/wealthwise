@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Transaction = require("./Transaction");
 const transactionSchema = require("./Transaction");
+const billSchema = require("./RecurringBills");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -10,6 +11,7 @@ const userSchema = mongoose.Schema(
     email: { type: String, required: true, unique: true, lowercase: true },
     password: { type: String, required: true, select: false },
     transactions: [transactionSchema],
+    bills: [billSchema],
     userName: { type: String },
     phoneNumber: { type: String },
     address: { type: String },
