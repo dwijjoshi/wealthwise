@@ -14,7 +14,7 @@ const AddTransaction = () => {
     type: "income",
     status: "confirmed",
     note: "",
-    date: new Date().toISOString().split("T")[0], // Default to today
+    date: "", // Default to today
   });
   const dispatch = useDispatch();
   const { id } = useParams();
