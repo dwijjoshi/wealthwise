@@ -45,7 +45,6 @@ const Dashboard = () => {
     return (((current - previous) / previous) * 100).toFixed(2);
   };
 
-  useEffect(() => {}, []);
   const monthlyData = {};
 
   user.transactions.forEach((tx) => {

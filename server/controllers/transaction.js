@@ -17,6 +17,7 @@ exports.createTransaction = async (req, res) => {
       success: true,
       message: "Transactions added successfully",
       transactions: user.transactions,
+      user,
     });
   } catch (error) {
     console.error(error);
@@ -78,6 +79,7 @@ exports.updateTransaction = async (req, res) => {
       success: true,
       message: "Transaction updated successfully",
       transactions: user.transactions,
+      user,
     });
   } catch (error) {
     console.error(error);
@@ -89,7 +91,7 @@ exports.updateTransaction = async (req, res) => {
 
 exports.deleteTransaction = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user._id;
     const transactionId = req.params.id;
 
     const user = await User.findById(userId);
@@ -110,11 +112,38 @@ exports.deleteTransaction = async (req, res) => {
       success: true,
       message: "Transaction deleted",
       transactions: user.transactions,
+      user,
     });
   } catch (error) {
     console.error(error);
     res
       .status(500)
       .json({ success: false, message: "Failed to delete transaction" });
+  }
+};
+
+exports.getSingleTransaction = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    const transaction = user.transactions.id(id);
+
+    if (!transaction) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Transaction not found" });
+    }
+
+    return res.status(200).json({ success: true, transaction });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 };

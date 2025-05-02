@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import moment from "moment";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveUser } from "../../slices/userSlice";
 
 const months = [
   { label: "All", value: "all" },
@@ -39,6 +41,7 @@ const Transactions = () => {
   const [isDashboardPage, setIsDashboardPage] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getAllTransaction();
@@ -71,6 +74,25 @@ const Transactions = () => {
         setTransactions(res.data.transactions);
       }
     } catch (error) {}
+  };
+
+  const deleteTransaction = async (id) => {
+    try {
+      if (id) {
+        const res = await axios.delete(
+          `http://localhost:8080/api/v1/transaction/${id}`,
+          { withCredentials: true }
+        );
+
+        if (res.data.success) {
+          getAllTransaction();
+          dispatch(saveUser(res.data.user));
+          toast.success(res.data.message);
+        }
+      }
+    } catch (error) {
+      toast.error(error.data.response.message);
+    }
   };
   return (
     <div className="p-6 bg-white rounded-2xl shadow-md">
@@ -140,10 +162,18 @@ const Transactions = () => {
                 </td>
                 {!isDashboardPage && (
                   <td className="flex p-3 gap-x-2">
-                    <div className="px-2 py-1 bg-yellow-300 text-yellow-600 rounded-md">
+                    <div
+                      onClick={() =>
+                        navigate(`/dashboard/transaction/${txn._id}`)
+                      }
+                      className="cursor-pointer px-2 py-1 bg-yellow-300 text-yellow-600 rounded-md"
+                    >
                       Edit
                     </div>
-                    <div className="px-2 py-1 bg-red-300 text-red-600 rounded-md">
+                    <div
+                      onClick={() => deleteTransaction(txn._id)}
+                      className="px-2 py-1 cursor-pointer bg-red-300 text-red-600 rounded-md"
+                    >
                       Delete
                     </div>
                   </td>

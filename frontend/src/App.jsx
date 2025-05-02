@@ -56,6 +56,7 @@ function App() {
             <Route path="" element={<Dashboard />} />
             <Route path="profile" element={<Profile />} />
             <Route path="transactions" element={<Transactions />} />
+            <Route path="transaction/:id" element={<AddTransaction />} />
             <Route path="add-transaction" element={<AddTransaction />} />
             <Route path="recurring-bills" element={<RecurringBills />} />
           </Route>
