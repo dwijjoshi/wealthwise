@@ -34,10 +34,10 @@ const RecurringBills = () => {
   const handleSubmit = async () => {
     try {
       await axios.post(
-        "http://wealthwise-sdlm.onrender.com/api/bills/add",
+        "https://wealthwise-sdlm.onrender.com/api/bills/add",
         formData
       );
-      fetchBills(); // Refresh transactions
+      //fetchBills(); // Refresh transactions
     } catch (err) {
       console.error("Error adding bill:", err);
     }
