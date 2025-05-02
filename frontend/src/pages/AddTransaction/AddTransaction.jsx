@@ -29,9 +29,11 @@ const AddTransaction = () => {
           );
 
           if (res.data.success) {
-            const { _id, ...transactionData } = res.data.transaction;
-            console.log(transactionData, "data");
-            setFormData(transactionData);
+            const { _id, date, ...rest } = res.data.transaction;
+            setFormData({
+              ...rest,
+              date: moment(date).format("YYYY-MM-DD"),
+            });
           }
         } catch (error) {}
       };
@@ -159,9 +161,7 @@ const AddTransaction = () => {
             <input
               type="date"
               name="date"
-              value={
-                id ? moment(formData.date).format("YYYY-MM-DD") : formData.date
-              }
+              value={formData.date}
               onChange={handleChange}
               className="w-full p-2 border rounded"
               required
