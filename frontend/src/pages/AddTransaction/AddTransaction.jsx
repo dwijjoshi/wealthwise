@@ -21,6 +21,7 @@ const AddTransaction = () => {
 
   useEffect(() => {
     if (id) {
+      console.log("in id");
       const fetchTransaction = async () => {
         try {
           const res = await axios.get(
