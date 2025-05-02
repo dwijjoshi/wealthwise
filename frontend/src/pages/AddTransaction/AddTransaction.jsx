@@ -50,7 +50,7 @@ const AddTransaction = () => {
     if (id) {
       try {
         const res = await axios.put(
-          `http://wealthwise-sdlm.onrender.com/api/v1/transaction/${id}`,
+          `https://wealthwise-sdlm.onrender.com/api/v1/transaction/${id}`,
           formData,
           { withCredentials: true }
         );
@@ -66,7 +66,7 @@ const AddTransaction = () => {
     } else {
       try {
         const res = await axios.post(
-          "http://wealthwise-sdlm.onrender.com/api/v1/transaction",
+          "https://wealthwise-sdlm.onrender.com/api/v1/transaction",
           formData,
           { withCredentials: true }
         );

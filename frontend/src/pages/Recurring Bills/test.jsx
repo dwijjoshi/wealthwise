@@ -33,7 +33,7 @@ export default function RecurringBills() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://wealthwise-sdlm.onrender.com/api/bills", form);
+    await axios.post("https://wealthwise-sdlm.onrender.com/api/bills", form);
     fetchBills();
     setForm({
       name: "",

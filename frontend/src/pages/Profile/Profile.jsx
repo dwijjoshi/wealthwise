@@ -65,7 +65,7 @@ const Profile = () => {
   const handleDeleteAccount = async () => {
     try {
       const res = await axios.delete(
-        "http://wealthwise-sdlm.onrender.com/api/v1/deleteAccount",
+        "https://wealthwise-sdlm.onrender.com/api/v1/deleteAccount",
         {
           withCredentials: true,
         }
