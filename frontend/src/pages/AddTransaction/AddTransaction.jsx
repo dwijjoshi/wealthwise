@@ -159,7 +159,9 @@ const AddTransaction = () => {
             <input
               type="date"
               name="date"
-              value={moment(formData.date).format("YYYY-MM-DD")}
+              value={
+                id ? moment(formData.date).format("YYYY-MM-DD") : formData.date
+              }
               onChange={handleChange}
               className="w-full p-2 border rounded"
               required
