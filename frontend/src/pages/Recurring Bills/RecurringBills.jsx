@@ -44,7 +44,7 @@ const RecurringBills = () => {
   };
 
   return (
-    <div className="bill-container p-4 bg-white rounded-md border">
+    <div className="bill-container poppins-text p-4 bg-white rounded-md">
       <h2 className="text-xl font-semibold mb-4">Recurring Bills</h2>
 
       <div className="grid md:grid-cols-3 gap-4">
