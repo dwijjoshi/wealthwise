@@ -24,7 +24,7 @@
   color: #0068ff;
 }
 
-button {
+.signup-form-container button {
   width: 63%;
   margin: 8px 0px;
   padding: 4px 8px;
@@ -48,7 +48,7 @@ button {
   width: 100%;
 }
 
-input {
+.signup-form-container input {
   width: 60%;
   margin: 8px 0px;
   padding: 6px 8px;
@@ -57,7 +57,7 @@ input {
   outline: none;
 }
 
-input:focus {
+.signup-form-container input:focus {
   border: 2px solid #3a85f7;
 }
 
