@@ -17,6 +17,8 @@ import { saveUser } from "./slices/userSlice";
 import Transactions from "./pages/Transaction/Transaction";
 import AddTransaction from "./pages/AddTransaction/AddTransaction";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import MyCards from "./pages/MyCards/MyCards.jsx";
+import AddCard from "./pages/AddCard/AddCard.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -62,6 +64,8 @@ function App() {
             <Route path="transaction/:id" element={<AddTransaction />} />
             <Route path="add-transaction" element={<AddTransaction />} />
             <Route path="recurring-bills" element={<RecurringBills />} />
+            <Route path="my-cards" element={<MyCards />} />
+            <Route path="add-card" element={<AddCard />} />
           </Route>
         </Routes>
       </Router>
