@@ -19,7 +19,7 @@ export default function Topbar() {
           <input
             type="text"
             placeholder="Search here"
-            className="outline-none bg-transparent text-sm w-full"
+            className="outline-none bg-transparent text-sm w-full input-width"
           />
         </div>
 
