@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+// in src/index.js or App.js
+
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
@@ -17,6 +19,11 @@ import { saveUser } from "./slices/userSlice";
 import Transactions from "./pages/Transaction/Transaction";
 import AddTransaction from "./pages/AddTransaction/AddTransaction";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import PaymentMethods from "./pages/Payments/PaymentMethods";
+import LinkedAccounts from "./pages/LinkedAccounts/LinkedAccounts";
+import ActivityLog from "./pages/ActivityLogs/ActivityLogs";
+
+import "./index.css"; // Tailwind will work from here
 
 function App() {
   const dispatch = useDispatch();
@@ -62,6 +69,9 @@ function App() {
             <Route path="transaction/:id" element={<AddTransaction />} />
             <Route path="add-transaction" element={<AddTransaction />} />
             <Route path="recurring-bills" element={<RecurringBills />} />
+            <Route path="payments" element={<PaymentMethods />} />
+            <Route path="linked-accounts" element={<LinkedAccounts />} />
+            <Route path="activity-log" element={<ActivityLog />} />
           </Route>
         </Routes>
       </Router>
