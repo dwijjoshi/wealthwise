@@ -5,6 +5,7 @@ const billSchema = require("./RecurringBills");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cardSchema = require("./Card");
+const paymentMethodSchema = require("./PaymentMethods");
 
 const userSchema = mongoose.Schema(
   {
@@ -14,6 +15,7 @@ const userSchema = mongoose.Schema(
     transactions: [transactionSchema],
     cards: [cardSchema],
     bills: [billSchema],
+    paymentMethods: [paymentMethodSchema],
     userName: { type: String },
     phoneNumber: { type: String },
     address: { type: String },
