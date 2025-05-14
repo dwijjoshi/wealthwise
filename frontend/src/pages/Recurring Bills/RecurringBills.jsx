@@ -44,7 +44,7 @@ const RecurringBills = () => {
   };
 
   return (
-    <div className="bill-container p-4 bg-white rounded-md border">
+    <div className="bill-container p-4 bg-white rounded-md poppins-text">
       <h2 className="text-xl font-semibold mb-4">Recurring Bills</h2>
 
       <div className="grid md:grid-cols-3 gap-4">
@@ -154,7 +154,7 @@ const RecurringBills = () => {
         </div>
       </div>
 
-      <hr className="my-6" />
+      <hr className="my-6 text-gray-300" />
 
       <div className="transaction-section">
         <div className="flex justify-between items-center mb-2">
@@ -177,7 +177,7 @@ const RecurringBills = () => {
           </thead>
           <tbody>
             {transactions.map((txn, index) => (
-              <tr key={index} className="border-b">
+              <tr key={index} className="border-b  border-gray-300">
                 <td>{txn.category}</td>
                 <td>{txn.amount}</td>
                 <td>{txn.frequency}</td>
