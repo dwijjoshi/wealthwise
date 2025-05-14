@@ -101,7 +101,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex p-4 bg-[#e4e3e367]">
+    <div className="flex p-4 bg-[#e4e3e367] poppins-text">
       <div className="flex-5 flex flex-col gap-y-4">
         <div className="flex justify-between">
           <h2>Month account report</h2>
