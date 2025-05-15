@@ -176,3 +176,22 @@ exports.deleteAccount = async (req, res) => {
     });
   }
 };
+
+exports.getActivityLogs = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    res.status(200).json({ success: true, acitivityLogs: user.activityLogs });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to fetch transactions" });
+  }
+};

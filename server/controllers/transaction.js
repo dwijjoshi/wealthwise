@@ -15,7 +15,7 @@ exports.createTransaction = async (req, res) => {
     user.transactions.push(newTransaction);
     const activityLog = {
       activityType: "Payment",
-      paymentActivity: req.body.type === "Income" ? "Recieved" : "Sent",
+      paymentActivity: req.body.type === "income" ? "Recieved" : "Sent",
       status: "Successful",
     };
 
