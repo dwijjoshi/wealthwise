@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cardSchema = require("./Card");
 const paymentMethodSchema = require("./PaymentMethods");
+const activityLogSchema = require("./ActivityLog");
 
 const userSchema = mongoose.Schema(
   {
@@ -16,6 +17,7 @@ const userSchema = mongoose.Schema(
     cards: [cardSchema],
     bills: [billSchema],
     paymentMethods: [paymentMethodSchema],
+    activityLogs: [activityLogSchema],
     userName: { type: String },
     phoneNumber: { type: String },
     address: { type: String },

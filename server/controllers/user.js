@@ -12,6 +12,12 @@ exports.register = async (req, res) => {
     }
     console.log("here");
     const user = new User({ name, email, password });
+    const activityLog = {
+      activityType: "Account Registered",
+      status: "Successful",
+    };
+
+    user.activityLogs.push(activityLog);
     await user.save();
     const token = await user.generateToken();
 
@@ -59,6 +65,13 @@ exports.login = async (req, res) => {
       });
     }
 
+    const activityLog = {
+      activityType: "Logged In",
+      status: "Successful",
+    };
+
+    user.activityLogs.push(activityLog);
+    await user.save();
     const token = await user.generateToken();
 
     res
@@ -104,6 +117,14 @@ exports.updateUser = async (req, res) => {
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
+
+    const activityLog = {
+      accountEdit: "Profile Update",
+      status: "Successful",
+    };
+
+    updatedUser.activityLogs.push(activityLog);
+    updatedUser.save();
 
     res.json({
       success: true,

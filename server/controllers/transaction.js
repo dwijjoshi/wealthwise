@@ -13,6 +13,13 @@ exports.createTransaction = async (req, res) => {
 
     const user = await User.findById(req.user._id);
     user.transactions.push(newTransaction);
+    const activityLog = {
+      activityType: "Payment",
+      paymentActivity: req.body.type === "Income" ? "Recieved" : "Sent",
+      status: "Successful",
+    };
+
+    user.activityLogs.push(activityLog);
     await user.save();
     res.status(201).json({
       success: true,
