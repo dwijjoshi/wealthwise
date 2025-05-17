@@ -12,6 +12,15 @@ exports.createTransaction = async (req, res) => {
       note: req.body.note || "",
     };
 
+    if (req.body.account !== "") {
+      const cardNumber = req.body.account;
+      const card = await user.cards.find((card) => card.number === cardNumber);
+
+      if (card) {
+        card.balance -= req.body.amount;
+        await user.save();
+      }
+    }
     const user = await User.findById(req.user._id);
     user.transactions.push(newTransaction);
     const activityLog = {
