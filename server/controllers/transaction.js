@@ -8,6 +8,7 @@ exports.createTransaction = async (req, res) => {
       date: req.body.date,
       type: req.body.type,
       status: req.body.status,
+      account: req.body.account,
       note: req.body.note || "",
     };
 
@@ -79,6 +80,7 @@ exports.updateTransaction = async (req, res) => {
     transaction.amount = req.body.amount || transaction.amount;
     transaction.date = req.body.date || transaction.date;
     transaction.type = req.body.type || transaction.type;
+    transaction.account = req.body.account || transaction.account;
     transaction.status = req.body.status || transaction.status;
     transaction.note = req.body.note || transaction.note;
 

@@ -67,6 +67,8 @@ const Dashboard = () => {
     }
   });
 
+  console.log(monthlyData, "monthylData");
+
   const currIncome = monthlyData[month].income;
   const currExprense = monthlyData[month].expense;
   const prevIncome = monthlyData[prevMonth].income;
