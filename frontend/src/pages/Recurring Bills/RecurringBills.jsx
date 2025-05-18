@@ -23,7 +23,8 @@ const RecurringBills = () => {
   const fetchBills = async () => {
     try {
       const res = await axios.get(
-        "https://wealthwise-sdlm.onrender.com/api/v1/bills"
+        "https://wealthwise-sdlm.onrender.com/api/v1/bills",
+        { withCredentials: true }
       );
       setTransactions(res.data.bills);
     } catch (err) {
@@ -35,7 +36,10 @@ const RecurringBills = () => {
     try {
       await axios.post(
         "https://wealthwise-sdlm.onrender.com/api/v1/bills/add",
-        formData
+        formData,
+        {
+          withCredentials: true,
+        }
       );
       //fetchBills(); // Refresh transactions
     } catch (err) {
