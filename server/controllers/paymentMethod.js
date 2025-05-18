@@ -43,7 +43,7 @@ exports.getAllPaymentMethods = async (req, res) => {
 exports.deletePaymentMethod = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
-    const paymentMethodId = req.param.id;
+    const paymentMethodId = req.params.id; // fix this line
 
     user.paymentMethods = user.paymentMethods.filter(
       (method) => method._id.toString() !== paymentMethodId
