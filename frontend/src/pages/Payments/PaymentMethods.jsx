@@ -5,6 +5,7 @@ import AccountTabs from "../../layout/Tabs";
 import { useLocation, useNavigate } from "react-router-dom";
 import visa from "../../assets/visa.png";
 import mastercard from "../../assets/mastercard.png";
+import Transactions from "../Transaction/Transaction";
 
 const PaymentDashboard = () => {
   const [paymentMethods, setPaymentMethods] = useState([]);
@@ -14,15 +15,15 @@ const PaymentDashboard = () => {
   const fetchPaymentMethods = async () => {
     try {
       const { data } = await axios.get(
-        "https://wealthwise-sdlm.onrender.com/api/v1/payment-method", //
+        "https://wealthwise-sdlm.onrender.com/api/v1/all-cards", //
         {
           withCredentials: true,
         }
       );
-
-      if (data && Array.isArray(data.paymentMethods)) {
-        setPaymentMethods(data.paymentMethods);
-        const defaultCard = data.paymentMethods.find((pm) => pm.isDefault);
+      console.log(data);
+      if (data && Array.isArray(data.cards)) {
+        setPaymentMethods(data.cards);
+        const defaultCard = data.cards.find((pm) => pm.default);
         setDefaultCardId(defaultCard?._id || null);
       } else {
         console.error("Unexpected API response format:", data);
@@ -55,7 +56,8 @@ const PaymentDashboard = () => {
         { isDefault: true },
         { withCredentials: true }
       );
-      setPaymentMethods(data.paymentMethods);
+      console.log(data);
+      setPaymentMethods(data.cards);
       setDefaultCardId(id);
     } catch (err) {
       console.error("Failed to update card", err);
@@ -65,41 +67,6 @@ const PaymentDashboard = () => {
   useEffect(() => {
     fetchPaymentMethods();
   }, []);
-
-  const transactions = [
-    {
-      user: "Maged Ycusri",
-      id: "ABC - 20158",
-      account: "......489",
-      date: "02/09/2024",
-      amount: "₹1400",
-      status: "Confirmed",
-    },
-    {
-      user: "Omar Ahmed",
-      id: "XCV- 14158",
-      account: "......587",
-      date: "12/09/2024",
-      amount: "₹3200",
-      status: "Pending",
-    },
-    {
-      user: "Amazon",
-      id: "ANM - 15558",
-      account: "......122",
-      date: "13/09/2024",
-      amount: "₹8500",
-      status: "Confirmed",
-    },
-    {
-      user: "Netflix",
-      id: "ABC - 20158",
-      account: "......789",
-      date: "30/09/2024",
-      amount: "₹1600",
-      status: "Confirmed",
-    },
-  ];
 
   return (
     <div className="p-6 max-w-6xl mx-auto font-sans text-gray-800 bg-gray-50 rounded-xl shadow-md poppins-text">
@@ -126,26 +93,24 @@ const PaymentDashboard = () => {
             paymentMethods.map((pm) => (
               <div
                 key={pm._id}
-                className="w-80 bg-white border border-gray-300 rounded-xl p-4 shadow-sm"
+                className="w-70 bg-white border border-gray-300 rounded-xl p-4 shadow-sm"
               >
                 <div className="flex justify-between items-start mb-3">
                   <img
-                    src={pm.type === "visa" ? visa : mastercard}
+                    src={pm.number.slice(0, 1) == "4" ? visa : mastercard}
                     alt={pm.type}
                     className="w-12 h-10"
                   />
                   <div className="flex flex-wrap">
                     <div className="text-sm text-gray-700 flex gap-2">
                       <p>Card No.</p>
-                      <p className="text-lg font-semibold text-red">
-                        **** **** **** {pm.details.last4}
+                      <p className="text-md font-semibold text-red">
+                        {pm.number}
                       </p>
                     </div>
                     <div className="text-sm text-gray-700 flex gap-2">
                       <p>Expiry Date</p>
-                      <p className="text-lg font-semibold">
-                        {pm.details.expiry}
-                      </p>
+                      <p className="text-md font-semibold">{pm.expiry}</p>
                     </div>
                   </div>
                 </div>
@@ -181,49 +146,8 @@ const PaymentDashboard = () => {
 
       {/* Transaction History */}
       <div className="mt-10 transaction-history-container">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold poppins-text">
-            Latest Transaction History
-          </h2>
-          <button className="text-purple-700 text-sm font-medium poppins-text  cursor-pointer">
-            View more details
-          </button>
-        </div>
         <div className="overflow-auto">
-          <table className="w-full text-left text-sm border-separate border-spacing-y-2">
-            <thead className="text-gray-600">
-              <tr>
-                <th>User name</th>
-                <th>Transaction - ID</th>
-                <th>Account</th>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {transactions.map((tx, i) => (
-                <tr key={i} className="bg-white">
-                  <td className="py-2">{tx.user}</td>
-                  <td>{tx.id}</td>
-                  <td>{tx.account}</td>
-                  <td>{tx.date}</td>
-                  <td>{tx.amount}</td>
-                  <td>
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        tx.status === "Confirmed"
-                          ? "bg-green-400 text-white"
-                          : "bg-yellow-400 text-white"
-                      }`}
-                    >
-                      {tx.status}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <Transactions />
         </div>
       </div>
 
