@@ -41,7 +41,7 @@ const RecurringBills = () => {
           withCredentials: true,
         }
       );
-      //fetchBills(); // Refresh transactions
+      fetchBills(); // Refresh transactions
     } catch (err) {
       console.error("Error adding bill:", err);
     }

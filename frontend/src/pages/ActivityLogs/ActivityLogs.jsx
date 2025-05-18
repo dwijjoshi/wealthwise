@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AccountTabs from "../../layout/Tabs";
+import moment from "moment";
 
 const months = [
   { label: "All", value: "all" },
@@ -95,7 +96,9 @@ const ActivityLog = () => {
             <tbody>
               {activityData.map((log, index) => (
                 <tr key={index} className="border-b text-sm">
-                  <td className="px-4 py-2">{log.dateTime}</td>
+                  <td className="px-4 py-2">
+                    {moment(log.date).format("DD-MMM-YYYY HH:MM:SS")}
+                  </td>
                   <td className="px-4 py-2">{log.location}</td>
                   <td className="px-4 py-2">{log.device}</td>
                   <td className="px-4 py-2">{log.accountEdit}</td>
