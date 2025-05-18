@@ -76,7 +76,7 @@ export default function Sidebar() {
               )}
             </NavLink>
             <NavLink
-              to="/dashboard/analytics"
+              to="/dashboard/"
               className="flex nav-link gap-x-2 items-center text-gray-700 hover:text-blue-600"
             >
               <img className="h-5 w-5" src="/Analytics icon.png" alt="" />
